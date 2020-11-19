@@ -20,6 +20,7 @@ import java.net.URI;
  * 类说明：
  */
 public class HttpClient {
+
     public static final String HOST  = "127.0.0.1";
     private static final boolean SSL = false;
     public void connect(String host, int port) throws Exception {
