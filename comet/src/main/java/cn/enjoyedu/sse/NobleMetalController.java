@@ -26,6 +26,12 @@ public class NobleMetalController {
         return "nobleMetal";
     }
 
+
+    /**
+     * 使用return 控制权交给了tomcat
+     * HTTP主动关闭了连接
+     * @return
+     */
     @RequestMapping(value="/needPrice"
             ,produces="text/event-stream;charset=UTF-8"
             )
@@ -41,7 +47,7 @@ public class NobleMetalController {
 
     }
 
-    /*业务方法，生成贵金属的实时价格*/
+    /**业务方法，生成贵金属的实时价格*/
     private String makeResp(Random r){
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("retry:2000\n")
@@ -59,7 +65,7 @@ public class NobleMetalController {
 
 
 
-    /*------------以下为正确使用SSE的姿势------------------*/
+    /**------------以下为正确使用SSE的姿势------------------*/
     @RequestMapping("/nobleMetalr")
     public String stockr(){
         return "nobleMetalAlso";
@@ -79,6 +85,7 @@ public class NobleMetalController {
                     return;
                 }
                 Thread.sleep(1000);
+                // 写往浏览器
                 pw.write(makeResp(r));
                 pw.flush();
                 i++;

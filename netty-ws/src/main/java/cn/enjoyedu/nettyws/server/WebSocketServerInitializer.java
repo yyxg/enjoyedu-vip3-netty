@@ -13,12 +13,12 @@ import io.netty.handler.ssl.SslContext;
 /**
  * @author Mark老师   享学课堂 https://enjoy.ke.qq.com
  * 往期课程和VIP课程咨询 依娜老师  QQ：2133576719
- * 类说明：增加handler
+ * 类说明：增加业务handler
  */
 public class WebSocketServerInitializer
         extends ChannelInitializer<SocketChannel> {
 
-    /*websocket访问路径*/
+    /**websocket访问路径*/
     private static final String WEBSOCKET_PATH = "/websocket";
 
     private final ChannelGroup group;
@@ -37,18 +37,21 @@ public class WebSocketServerInitializer
             pipeline.addLast(sslCtx.newHandler(ch.alloc()));
         }
         pipeline.addLast(new HttpServerCodec());
+        //聚合
         pipeline.addLast(new HttpObjectAggregator(65536));
 
-        /*支持ws数据的压缩传输*/
+        /**支持ws数据的压缩传输*/
         pipeline.addLast(new WebSocketServerCompressionHandler());
 
         pipeline.addLast(new WebSocketServerProtocolHandler(WEBSOCKET_PATH,
                 null,true));
 
-        /*浏览器访问的时候展示index页面*/
+        /**浏览器访问的时候展示index页面*/
         pipeline.addLast(new ProcessWsIndexPageHandler(WEBSOCKET_PATH));
 
-        /*对WS的数据进行处理*/
+        /**对WS的数据进行处理
+         * 所有客户端的通道
+         */
         pipeline.addLast(new ProcesssWsFrameHandler(group));
 
     }

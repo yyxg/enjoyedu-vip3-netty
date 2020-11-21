@@ -9,7 +9,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 
-/*
+/**
  *  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com
  *  *类说明：在线聊天室
  */
@@ -17,10 +17,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class StompController {
 
+    /**Spring实现的一个发送模板类*/
     @Autowired
-    private SimpMessagingTemplate template;/*Spring实现的一个发送模板类*/
+    private SimpMessagingTemplate template;
 
-    /*消息群发，接受发送至自massRequest的请求*/
+    /**消息群发，接受发送至自massRequest的请求*/
     @MessageMapping("/massRequest")
     @SendTo("/mass/getResponse")
     public ChatRoomResponse mass(ChatRoomRequest chatRoomRequest){
@@ -32,7 +33,7 @@ public class StompController {
         return response;
     }
 
-    /*单独聊天，接受发送至自aloneRequest的请求*/
+    /**单独聊天，接受发送至自aloneRequest的请求*/
     @MessageMapping("/aloneRequest")
     public ChatRoomResponse alone(ChatRoomRequest chatRoomRequest){
         System.out.println("SendToUser = " + chatRoomRequest.getUserId()
@@ -41,6 +42,7 @@ public class StompController {
         ChatRoomResponse response=new ChatRoomResponse();
         response.setName(chatRoomRequest.getName());
         response.setChatValue(chatRoomRequest.getChatValue());
+        //指明发给那个用户
         this.template.convertAndSendToUser(chatRoomRequest.getUserId()+"",
                 "/alone",response);
         return response;

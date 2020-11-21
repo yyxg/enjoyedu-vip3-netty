@@ -9,17 +9,23 @@ import java.util.Map;
  */
 public final class MyHeader {
 
+    /**CRC校验*/
     private int crcCode = 0xabef0101;
 
-    private int length;// 消息长度
+    /**消息长度*/
+    private int length;
 
-    private long sessionID;// 会话ID
+    /**会话ID*/
+    private long sessionID;
 
-    private byte type;// 消息类型
+    /**消息类型*/
+    private byte type;
 
-    private byte priority;// 消息优先级
+    /**消息优先级*/
+    private byte priority;
 
-    private Map<String, Object> attachment = new HashMap<String, Object>(); // 附件
+    /**消息头额外附件*/
+    private Map<String, Object> attachment = new HashMap<String, Object>();
 
     public final int getCrcCode() {
     	return crcCode;

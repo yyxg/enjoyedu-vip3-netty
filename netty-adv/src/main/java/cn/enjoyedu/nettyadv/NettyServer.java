@@ -28,10 +28,10 @@ public class NettyServer {
             .childHandler(new ServerInit());
 
         // 绑定端口，同步等待成功
-        b.bind(NettyConstant.REMOTE_PORT).sync();
+        b.bind(NettyConstant.SERVER_PORT).sync();
             LOG.info("Netty server start : "
-                + (NettyConstant.REMOTE_IP + " : "
-                    + NettyConstant.REMOTE_PORT));
+                + (NettyConstant.SERVER_IP + " : "
+                    + NettyConstant.SERVER_PORT));
     }
 
     public static void main(String[] args) throws Exception {

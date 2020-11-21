@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  */
 @Controller
 @RequestMapping(produces="text/html;charset=UTF-8")
-/*记得要在WebInitializer中增加servlet.setAsyncSupported(true);*/
+/**记得要在WebInitializer中增加servlet.setAsyncSupported(true);*/
 public class PushNewsController {
 
     private ExecutorService executorService
@@ -30,7 +30,7 @@ public class PushNewsController {
 
     @RequestMapping(value="/realTimeNews")
     @ResponseBody
-    /*在WebInitializer中要加上servlet.setAsyncSupported(true);*/
+    /**在 WebInitializer 中要加上servlet.setAsyncSupported(true);*/
     public DeferredResult<String> realtimeNews(HttpServletRequest request){
         final DeferredResult<String> dr = new DeferredResult<String>();
 

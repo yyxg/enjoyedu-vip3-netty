@@ -15,23 +15,27 @@ import io.netty.util.concurrent.ImmediateEventExecutor;
 /**
  * @author Mark老师   享学课堂 https://enjoy.ke.qq.com
  * 往期课程和VIP课程咨询 依娜老师  QQ：2133576719
- * 类说明：
+ * 类说明：服务端
  */
 public final class WebSocketServer {
 
-    /*创建 DefaultChannelGroup，用来保存所
+    /**创建 DefaultChannelGroup，用来保存所
     有已经连接的 WebSocket Channel，群发和一对一功能可以用上*/
     private final static ChannelGroup channelGroup =
             new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE);
 
-    static final boolean SSL = false;//是否启用ssl
-    /*通过ssl访问端口为8443，否则为8080*/
+    /**
+     * 是否启用ssl
+     */
+    static final boolean SSL = false;
+
+    /**通过ssl访问端口为8443，否则为8080*/
     static final int PORT
             = Integer.parseInt(
                     System.getProperty("port", SSL? "8443" : "8080"));
 
     public static void main(String[] args) throws Exception {
-        /*SSL配置*/
+        /**SSL配置*/
         final SslContext sslCtx;
         if (SSL) {
             SelfSignedCertificate ssc = new SelfSignedCertificate();

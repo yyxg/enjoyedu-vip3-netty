@@ -31,11 +31,17 @@ public class ProcesssWsFrameHandler
     @Override
     protected void channelRead0(ChannelHandlerContext ctx,
                                 WebSocketFrame frame) throws Exception {
+
+        /**
+         * 判断是否是文本帧
+         */
         if(frame instanceof TextWebSocketFrame){
             String request = ((TextWebSocketFrame)frame).text();
             ctx.channel().writeAndFlush(
                     new TextWebSocketFrame(request.toUpperCase(Locale.CHINA)));
-            /*群发*/
+            /**
+             * 群发，group：通道的集合
+             */
             group.writeAndFlush(
                     new TextWebSocketFrame(
                             "Client"+ctx.channel()+"say:"+request.toUpperCase(Locale.CHINA)
@@ -46,11 +52,11 @@ public class ProcesssWsFrameHandler
         }
     }
 
-    /*重写 userEventTriggered()方法以处理自定义事件*/
+    /**重写 userEventTriggered()方法以处理自定义事件*/
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx,
                                    Object evt) throws Exception {
-        /*检查事件类型，如果是ws握手成功事件，群发通知*/
+        /**检查事件类型，如果是ws握手成功事件，群发通知*/
        if(evt == WebSocketServerProtocolHandler.
                ServerHandshakeStateEvent.HANDSHAKE_COMPLETE){
            group.writeAndFlush(

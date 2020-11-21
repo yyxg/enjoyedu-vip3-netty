@@ -11,11 +11,12 @@ import java.io.IOException;
 
 /**
  * @author Mark老师   享学课堂 https://enjoy.ke.qq.com
- * 类说明：
+ * 类说明：Kryo的序列化器，负责序列化和反序列化
  */
 public class KryoSerializer {
     private static Kryo kryo = KryoFactory.createKryo();
 
+    /*序列化*/
     public static void serialize(Object object, ByteBuf out) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Output output = new Output(baos);
@@ -33,6 +34,7 @@ public class KryoSerializer {
         out.writeBytes(b);
     }
 
+    /*反序列化*/
     public static Object deserialize(ByteBuf out) {
         if (out == null) {
             return null;

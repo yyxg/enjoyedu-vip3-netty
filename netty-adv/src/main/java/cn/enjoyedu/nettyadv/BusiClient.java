@@ -1,5 +1,8 @@
 package cn.enjoyedu.nettyadv;
 
+import cn.enjoyedu.nettyadv.busivo.User;
+import cn.enjoyedu.nettyadv.busivo.UserContact;
+
 import java.util.Scanner;
 
 /**
@@ -31,7 +34,18 @@ public class BusiClient {
                 }
                 scanner.close();
                 System.exit(1);
-            } else {
+            } else if("v".equals(msg.toLowerCase())){
+                User user = new User();
+                user.setAge(19);
+                String userName = "ABCDEFG --->1";
+                user.setUserName(userName);
+                user.setId("No:1");
+                user.setUserContact(
+                        new UserContact(userName+"@xiangxue.com",
+                                "133"));
+                nettyClient.send(user);
+            }
+            else {
                 nettyClient.send(msg);
             }
         }

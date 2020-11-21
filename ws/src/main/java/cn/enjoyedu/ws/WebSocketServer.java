@@ -25,10 +25,10 @@ public class WebSocketServer {
     private static Logger log = LoggerFactory.getLogger(WebSocketServer.class);
     private static final AtomicInteger onlineCount
             = new AtomicInteger(0);
-    /*线程安全Set，用来存放每个客户端对应的Session对象。*/
+    /**线程安全Set，用来存放每个客户端对应的Session对象。*/
     private static CopyOnWriteArraySet<Session> sessionSet
             = new CopyOnWriteArraySet<Session>();
-    /*线程安全Map，用来存放每个客户端sessionid和用户名的对应关系。*/
+    /**线程安全Map，用来存放每个客户端sessionid和用户名的对应关系。*/
     private static Map<String,String> sessionMap
             = new ConcurrentHashMap<>();
 

@@ -12,14 +12,14 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
  * 类说明：
  */
 @Configuration
-/*开启使用Stomp协议来传输基于消息broker的消息
+/**开启使用Stomp协议来传输基于消息broker的消息
 这时控制器支持使用@MessageMapping,就像使用@RequestMapping一样*/
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        /*注册STOMP协议的节点(endpoint),并映射指定的url,
+        /**注册STOMP协议的节点(endpoint),并映射指定的url,
         * 添加一个访问端点“/endpointMark”,客户端打开双通道时需要的url,
         * 允许所有的域名跨域访问，指定使用SockJS协议。*/
         registry.addEndpoint("/endpointMark")
@@ -30,6 +30,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/mass","/user");
+        //单聊的前缀
         registry.setUserDestinationPrefix("/user/");
     }
 

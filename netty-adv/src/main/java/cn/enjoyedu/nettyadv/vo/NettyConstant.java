@@ -5,6 +5,6 @@ package cn.enjoyedu.nettyadv.vo;
  * 类说明：常量说明
  */
 public final class NettyConstant {
-    public static final String REMOTE_IP = "127.0.0.1";
-    public static final int REMOTE_PORT = 8989;
+    public static final String SERVER_IP = "127.0.0.1";
+    public static final int SERVER_PORT = 8989;
 }
